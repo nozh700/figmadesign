@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NovaPay Dashboard</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Inter, Arial, sans-serif;
+      color: #172033;
+      background: #f5f7fb;
+      line-height: 1.5;
+    }
+
+    .app {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 260px 1fr;
+    }
+
+    .sidebar {
+      background: #101827;
+      color: #ffffff;
+      padding: 28px 22px;
+    }
+
+    .brand {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 36px;
+    }
+
+    .nav {
+      display: grid;
+      gap: 10px;
+    }
+
+    .nav a {
+      color: #cbd5e1;
+      text-decoration: none;
+      padding: 12px 14px;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+
+    .nav a.active,
+    .nav a:hover {
+      background: #243147;
+      color: #ffffff;
+    }
+
+    .main {
+      padding: 28px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .topbar h1 {
+      font-size: 30px;
+      line-height: 1.2;
+    }
+
+    .topbar p {
+      color: #64748b;
+      margin-top: 4px;
+    }
+
+    .button {
+      border: 0;
+      background: #2563eb;
+      color: #ffffff;
+      padding: 12px 18px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .button:hover {
+      background: #1d4ed8;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+
+    .card {
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.05);
+    }
+
+    .card span {
+      color: #64748b;
+      font-size: 14px;
+    }
+
+    .card strong {
+      display: block;
+      font-size: 28px;
+      margin-top: 8px;
+    }
+
+    .positive {
+      color: #059669;
+      font-size: 14px;
+      margin-top: 8px;
+    }
+
+    .content {
+      display: grid;
+      grid-template-columns: 1.4fr 0.8fr;
+      gap: 18px;
+    }
+
+    .section-title {
+      font-size: 20px;
+      margin-bottom: 16px;
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .table th,
+    .table td {
+      text-align: left;
+      padding: 14px 10px;
+      border-bottom: 1px solid #e5e7eb;
+      font-size: 14px;
+    }
+
+    .table th {
+      color: #64748b;
+      font-weight: 700;
+    }
+
+    .status {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: #dcfce7;
+      color: #166534;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .activity {
+      display: grid;
+      gap: 14px;
+    }
+
+    .activity-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      background: #2563eb;
+      border-radius: 50%;
+      margin-top: 7px;
+      flex: 0 0 auto;
+    }
+
+    .activity-item h3 {
+      font-size: 15px;
+    }
+
+    .activity-item p {
+      color: #64748b;
+      font-size: 14px;
+    }
+
+    @media (max-width: 980px) {
+      .app {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        padding: 18px;
+      }
+
+      .brand {
+        margin-bottom: 18px;
+      }
+
+      .nav {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .nav a {
+        text-align: center;
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .content {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .main {
+        padding: 18px;
+      }
+
+      .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .topbar h1 {
+        font-size: 24px;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .nav {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .table {
+        min-width: 560px;
+      }
+
+      .table-wrap {
+        overflow-x: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">NovaPay</div>
+      <nav class="nav">
+        <a class="active" href="#">Overview</a>
+        <a href="#">Payments</a>
+        <a href="#">Customers</a>
+        <a href="#">Reports</a>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <h1>Payment Analytics</h1>
+          <p>Track revenue, transactions, and customer activity.</p>
+        </div>
+        <button class="button">Download Report</button>
+      </header>
+
+      <section class="stats">
+        <div class="card">
+          <span>Total Revenue</span>
+          <strong>$84,260</strong>
+          <p class="positive">+12.5% this month</p>
+        </div>
+        <div class="card">
+          <span>Transactions</span>
+          <strong>12,840</strong>
+          <p class="positive">+8.2% this month</p>
+        </div>
+        <div class="card">
+          <span>Active Users</span>
+          <strong>4,920</strong>
+          <p class="positive">+5.7% this month</p>
+        </div>
+        <div class="card">
+          <span>Success Rate</span>
+          <strong>98.4%</strong>
+          <p class="positive">+1.1% this month</p>
+        </div>
+      </section>
+
+      <section class="content">
+        <div class="card">
+          <h2 class="section-title">Recent Payments</h2>
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Customer</th>
+                  <th>Amount</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Aarav Sharma</td>
+                  <td>$1,240</td>
+                  <td>30 May 2026</td>
+                  <td><span class="status">Paid</span></td>
+                </tr>
+                <tr>
+                  <td>Priya Mehta</td>
+                  <td>$860</td>
+                  <td>29 May 2026</td>
+                  <td><span class="status">Paid</span></td>
+                </tr>
+                <tr>
+                  <td>Rahul Verma</td>
+                  <td>$2,120</td>
+                  <td>28 May 2026</td>
+                  <td><span class="status">Paid</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 class="section-title">Activity</h2>
+          <div class="activity">
+            <div class="activity-item">
+              <div class="dot"></div>
+              <div>
+                <h3>New invoice generated</h3>
+                <p>Invoice #NP-2048 was created successfully.</p>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="dot"></div>
+              <div>
+                <h3>Payment received</h3>
+                <p>$1,240 received from Aarav Sharma.</p>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="dot"></div>
+              <div>
+                <h3>Report updated</h3>
+                <p>Monthly analytics report is ready.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
